@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
+  </head>
+<body>
+ <script>
+      // HTMLがロードしたときにinit関数を起動
+      window.addEventListener('DOMContentLoaded', init);
+
+      function init() {
+        // 縦と横を作成
+        const width = 800
+        const height = 600;
+
+        // レンダラーを作成
+        var renderer = new THREE.WebGLRenderer();
+        document.body.appendChild(renderer.domElement);
+        renderer.setSize(width, height);
+
+        // シーンを作成
+        const scene = new THREE.Scene();
+
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        // カメラの位置設定
+        camera.position.set(3, 2, 4); //
+        camera.lookAt(0, 0, 0); //
+
+        // 平行光源１
+        var directionalLight1 = new THREE.DirectionalLight(0xffffff);
+        directionalLight1.position.set(10, 10, 10);
+        // 表示
+        scene.add(directionalLight1);
+        // 平行光源２
+        var directionalLight2 = new THREE.DirectionalLight(0x888888);
+        directionalLight2.position.set(-10, -10, 10);
+        // 表示
+        scene.add(directionalLight2);
+        // 環境光１
+        var AmbientLightl1 = new THREE.AmbientLight(0xffffff);
+        AmbientLight1.position.set(5, 10, 5);
+        // 表示
+        scene.add( AmbientLight1);
+        
+
+        // helper
+        const gridHelper = new THREE.GridHelper(2,10); // size, step
+        scene.add(gridHelper);
+        const axisHelper = new THREE.AxisHelper(2); //霆ｸ縺ｮ髟ｷ縺輔X�ｼ夊ｵ､縲〆�ｼ夂ｷ代】�ｼ夐搨
+        scene.add(axisHelper);
+
+        // 箱を作成
+        //ドーナッツ
+        var torusGeometry = new THREE.TorusGeometry( 1.0, 0.4, 12, 12 ); 
+        var material = new THREE.MeshPhongMaterial({ color: 0x0000ff });
+        var torusMaterial = new THREE. MeshPhongMaterial( { color: 0x0000ff } );
+        var torus = new THREE.Mesh( torusGeometry, torusMaterial );
+        torus.position.set( 0, 0, -5);
+        scene.add( torus );
+
+        update();
+
+        // 初回実行
+        function update() {
+          // レンダラーにシーンとカメラを指定して描画
+          renderer.render(scene, camera);
+          requestAnimationFrame(update);
+          // 箱を回転させる
+          box.rotation.x += 0.001;
+          box.rotation.y += 0.001;
+          box.rotation.z += 0.01;
+        }
+      }
+    </script>
+</body>
+</html>
