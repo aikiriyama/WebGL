@@ -3,27 +3,13 @@
 <head>
  <meta charset="UTF-8">
  <title>Demo</title>
- <!-- three.jsを読み込む(ローカル) -->
- <!-- <script src="./three.js"></script> -->
- <!-- three.jsを読み込む(CDN) -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
 </head>
 <body>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <script src="https://unpkg.com/three@0.137.4/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
-  </head>
-<body>
  <script>
-      // HTMLがロードしたときにinit関数を起動
-      window.addEventListener('DOMContentLoaded', init);
-
-      function init() {
-        // 縦と横を作成
-        const width = 800
-        const height = 600;
+     var init = function() {
+ var width = 900,
+ height = 700;
 
         // レンダラーを作成
         var renderer = new THREE.WebGLRenderer();
@@ -59,16 +45,15 @@
         // helper
         const gridHelper = new THREE.GridHelper(2,10); // size, step
         scene.add(gridHelper);
-        const axisHelper = new THREE.AxisHelper(2); //霆ｸ縺ｮ髟ｷ縺輔X�ｼ夊ｵ､縲〆�ｼ夂ｷ代】�ｼ夐搨
+        const axisHelper = new THREE.AxisHelper(2); //
         scene.add(axisHelper);
 
-        // 箱を作成
         //ドーナッツ
         var torusGeometry = new THREE.TorusGeometry( 1.0, 0.4, 12, 12 ); 
-        var material = new THREE.MeshPhongMaterial({ color: 0x0000ff });
-        var torusMaterial = new THREE. MeshPhongMaterial( { color: 0x0000ff } );
+        var material = new THREE.MeshStandardMaterial({ color: 0x6699FF, wireframe: true });
+        var torusMaterial = new THREE. MeshStandardMaterial( { color: 0x6699FF, wireframe: true });
         var torus = new THREE.Mesh( torusGeometry, torusMaterial );
-        torus.position.set( 0, 0, -5);
+        torus.position.set( 0, 0, -3);
         scene.add( torus );
 
         update();
@@ -84,6 +69,7 @@
           box.rotation.z += 0.01;
         }
       }
+ window.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
